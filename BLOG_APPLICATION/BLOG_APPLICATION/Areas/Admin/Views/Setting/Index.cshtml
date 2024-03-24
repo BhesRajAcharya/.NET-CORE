@@ -1,0 +1,85 @@
+﻿@model BLOG_APPLICATION.ViewModel.SettingVM
+
+@{
+    ViewData["Title"] = "Site settings";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-primary mb-1" asp-action="Index" asp-controller="User">Go Back</a>
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h4 class="card-title text-white">Settings</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Index" asp-controller="Setting" asp-area="admin" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-9">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="mb-2">
+                            <label>SiteName</label>
+                            <input type="text" asp-for="siteName" class="form-control" />
+                            <span asp-validation-for="siteName"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Tttle</label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>ShortDescription</label>
+                            <input type="text" asp-for="shortDescription" class="form-control" />
+                            <span asp-validation-for="shortDescription"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>FacebookUrl</label>
+                            <input type="text" asp-for="facebookUrl" class="form-control" />
+                            <span asp-validation-for="facebookUrl"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>GithubUrl</label>
+                            <input type="text" asp-for="githubUrl" class="form-control" />
+                            <span asp-validation-for="githubUrl"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>TwitterUrl</label>
+                            <input type="text" asp-for="githubUrl" class="form-control" />
+                            <span asp-validation-for="twitterUrl"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="mb-2">
+                            <img src="~/Images/download.png" class="img-fluid" id="thumbnail" />
+                        </div>
+                        <div class="mb-2">
+                            <label>Image</label>
+                            <input type="file" asp-for="image" class="custom-file" />
+                            <span asp-validation-for="image"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(".custom-file").on("change", function () {
+            var filename = $(this).val().split("//").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(filename);
+            document.getElementById("thumbnail").src = window.URL.createObjectURL(this.files[0]);
+        });
+    </script>
+}
+

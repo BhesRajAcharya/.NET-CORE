@@ -1,0 +1,52 @@
+﻿@model List<BLOG_APPLICATION.ViewModel.PostVM>
+
+@{
+    ViewData["Title"] = "List of Posts";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-primary mb-1"  asp-action="CreatePost" asp-controller="Post" asp-area="admin">Add Post</a>
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h4 class="card-title text-white">List of Posts</h4>
+        </div>
+        <div class="card-body" style="background-color:lightgray">
+            @foreach(var post in Model){
+                <div class=" rounded mb-2 bg-white p-2" style="border:2px solid black ">
+                    <div class="row">
+
+                        <div class="col-2">
+                            @if (post.ImageUrl == null)
+                            {
+                                <img class="img-fluid" src="~/Images/download.png" alt="No Image" style=" object-fit:fill ;height: 100px; width:100px" />
+                            }
+                            else
+                            {
+                                <img class="img-fluid" src="~/Images/@post.ImageUrl" alt="No Image" style=" object-fit:fill ;height: 100px; width:100px" />
+                            }
+                           
+                        </div>
+                     <div class="col-5">
+                            <h4 style="font-size:1.5rem" class="text-primary fw-bold">@post.Title</h4>
+                            <p>@post.createdDate</p>
+                     </div>
+
+                        <div class="col-5 text-right">
+                            <h4 style="font-size:1rem" class="text-primary fw-bold">@post.AuthorName</h4>
+                            <div class="d-flex justify-content-end">
+                                <a  class="btn btn-primary"  asp-controller="Post" asp-action="Edit" asp-area="admin" asp-route-id="@post.Id">Edit</a>
+                                <form method="post" asp-controller="Post" asp-action="Delete" asp-area="admin" asp-route-id="@post.Id" onsubmit="return confirm('do you want to delete this post')">
+                                       <button type="submit" class="btn btn-danger" >Delete</button>
+                                    </form>
+                            </div>
+                        </div>
+
+                 </div>
+             </div>
+            }
+
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,75 @@
+﻿@model BLOG_APPLICATION.ViewModel.PageVM
+
+@{
+    ViewData["Title"] = "About page";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-primary mb-1" asp-action="Index" asp-controller="Post">Go Back</a>
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h4 class="card-title text-white">About Page</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="About" asp-controller="Page" asp-area="admin" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Tttle</label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>ShortDescription</label>
+                            <input type="text" asp-for="ShortDescription" class="form-control" />
+                            <span asp-validation-for="ShortDescription"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Description</label>
+                            <textarea type="text" id="richEditor" asp-for="Description" class="form-control" rows="8"> <</textarea>
+                            <span asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="mb-2">
+                            @if (Model.ImageUrl == null)
+                            {
+                                <img src="~/Images/download.png" class="img-fluid" id="thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/@Model.ImageUrl" class="img-fluid" id="thumbnail" />
+                            }
+
+                        </div>
+                        <div class="mb-2">
+                            <label>Image</label>
+                            <input type="file" asp-for="Image" class="custom-file" />
+                            <span asp-validation-for="Image"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(".custom-file").on("change", function () {
+            var filename = $(this).val().split("//").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(filename);
+            document.getElementById("thumbnail").src = window.URL.createObjectURL(this.files[0]);
+        });
+    </script>
+}
+

@@ -1,0 +1,56 @@
+﻿@model BLOG_APPLICATION.ViewModel.Register
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-primary mb-1" asp-action="Index" asp-controller="User">Go Back</a>
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h4 class="card-title text-white">Register User</h4>
+        </div>
+        <div class="card-body">
+          <form asp-action="Register" asp-controller="User" >
+              <div class="mb-2">
+                  <label>FirstName</label>
+                  <input type="text" asp-for="FirstName" class="form-control" />
+                  <span asp-validation-for="FirstName"></span>
+              </div>
+                <div class="mb-2">
+                    <label>LastName</label>
+                    <input type="text" asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label>UserName</label>
+                    <input type="text" asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label>Email</label>
+                    <input type="email" asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label>Password</label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mb-2">
+                    <input type="checkbox" asp-for="IsAdmin" class="custom-checkbox" />
+                    <label>IsAdmin? </label>
+                </div>
+                <div class="mb-2">
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+
+          </form>
+
+        </div>
+    </div>
+</div>
